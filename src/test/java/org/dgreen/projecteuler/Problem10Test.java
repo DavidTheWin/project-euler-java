@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ProblemTenTest {
+class Problem10Test {
     @Test
     void canCalculateTheSumOfPrimesBelowTen() {
-        assertThat(ProblemTen.sumOfPrimesUpTo(10))
+        assertThat(Problem10.sumOfPrimesUpTo(10))
                 .isEqualTo(17);
     }
 
     @Test
     void canCalculateTheSumOfPrimesBelowTwoMillion() {
-        assertThat(ProblemTen.sumOfPrimesUpTo(2000000))
+        assertThat(Problem10.sumOfPrimesUpTo(2000000))
                 .isEqualTo(142913828922L);
     }
 }

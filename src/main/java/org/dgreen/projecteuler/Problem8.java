@@ -1,6 +1,6 @@
 package org.dgreen.projecteuler;
 
-public class ProblemEight {
+public class Problem8 {
     public static long greatestProductOfAdjacentNDigits(int n) {
         var largestProduct = 0L;
 
