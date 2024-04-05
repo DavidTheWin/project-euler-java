@@ -7,6 +7,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class Problem5Test {
     @Test
+    void canFindSmallestNumberEvenlyDivisibleByNumbersUpToOne() {
+        assertThat(Problem5.smallestNumberEvenlyDivisibleByNumbersUpTo(1))
+                .isEqualTo(1);
+    }
+
+    @Test
+    void canFindSmallestNumberEvenlyDivisibleByNumbersUpToTwo() {
+        assertThat(Problem5.smallestNumberEvenlyDivisibleByNumbersUpTo(2))
+                .isEqualTo(2);
+    }
+
+    @Test
     void canFindSmallestNumberEvenlyDivisibleByNumbersUpToThree() {
         assertThat(Problem5.smallestNumberEvenlyDivisibleByNumbersUpTo(3))
                 .isEqualTo(6);
