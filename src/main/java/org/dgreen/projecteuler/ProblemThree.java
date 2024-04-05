@@ -8,7 +8,7 @@ import static org.dgreen.projecteuler.utils.LongUtils.upperPrimeFactorLimitOf;
 
 public class ProblemThree {
     public static long largestPrimeFactorOf(long number) {
-        return LongStream.range(1, upperPrimeFactorLimitOf(number))
+        return LongStream.rangeClosed(1, upperPrimeFactorLimitOf(number))
                 .filter(LongUtils::isPrime)
                 .filter(factor -> isDivisibleBy(number, factor))
                 .max()
