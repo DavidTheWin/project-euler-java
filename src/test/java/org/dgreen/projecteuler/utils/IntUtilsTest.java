@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,6 +45,12 @@ class IntUtilsTest {
     }
 
     @ParameterizedTest
+    @MethodSource("numbersDivisibleByAllDivisors")
+    void isDivisibleByNumbersReturnsTrueWhenDivisibleByAllDivisors(int number, int[] divisors) {
+        assertThat(IntUtils.isDivisibleByNumbers(number, divisors)).isTrue();
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {1, 11, 121, 1331, 9009})
     void isPalindromeReturnsTrueWhenGivenAPalindrome(int palindrome) {
         assertThat(IntUtils.isPalindrome(palindrome)).isTrue();
@@ -68,6 +75,14 @@ class IntUtilsTest {
                 Arguments.of(3, 2),
                 Arguments.of(5, 2),
                 Arguments.of(9, 4)
+        );
+    }
+
+    private static Stream<Arguments> numbersDivisibleByAllDivisors() {
+        return Stream.of(
+                Arguments.of(1, new int[] { 1 }),
+                Arguments.of(6, new int[] { 1, 2, 3, 6 }),
+                Arguments.of(2520, IntStream.rangeClosed(1, 10).toArray())
         );
     }
 }
