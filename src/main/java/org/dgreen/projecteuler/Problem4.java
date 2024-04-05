@@ -6,7 +6,7 @@ import org.dgreen.projecteuler.utils.Pair;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class ProblemFour {
+public class Problem4 {
     public static int largestPalindromeByProductsUpTo(int limit) {
         return allPairsUpToLimit(limit)
                 .stream()

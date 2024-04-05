@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ProblemSevenTest {
+class Problem7Test {
     @Test
     void canFindTheSixthPrimeNumber() {
-        assertThat(ProblemSeven.nthPrimeNumber(6))
+        assertThat(Problem7.nthPrimeNumber(6))
                 .isEqualTo(13);
     }
 
     @Test
     void canFindTheTenThousandAndFirstPrimeNumber() {
-        assertThat(ProblemSeven.nthPrimeNumber(10001))
+        assertThat(Problem7.nthPrimeNumber(10001))
                 .isEqualTo(104743);
     }
 }

@@ -2,7 +2,7 @@ package org.dgreen.projecteuler;
 
 import java.util.stream.IntStream;
 
-public class ProblemSix {
+public class Problem6 {
     public static int sumSquareDifferenceUpTo(int limit) {
         return squareSum(limit) - sumSquares(limit);
     }

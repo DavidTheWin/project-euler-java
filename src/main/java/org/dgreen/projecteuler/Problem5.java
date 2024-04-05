@@ -4,7 +4,7 @@ import org.dgreen.projecteuler.utils.IntUtils;
 
 import java.util.stream.IntStream;
 
-public class ProblemFive {
+public class Problem5 {
     public static int smallestNumberEvenlyDivisibleByNumbersUpTo(int limit) {
         if (limit < 1) {
             throw new IllegalArgumentException(String.format("The limit must be at least 1, was %d", limit));

@@ -4,14 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ProblemFourTest {
+class Problem4Test {
     @Test
     void canFindLargestPalindromeByProductsOfTwoDigitNumbers() {
-        assertThat(ProblemFour.largestPalindromeByProductsUpTo(99)).isEqualTo(9009);
+        assertThat(Problem4.largestPalindromeByProductsUpTo(99)).isEqualTo(9009);
     }
 
     @Test
     void canFindLargestPalindromeByProductsOfThreeDigitNumbers() {
-        assertThat(ProblemFour.largestPalindromeByProductsUpTo(999)).isEqualTo(906609);
+        assertThat(Problem4.largestPalindromeByProductsUpTo(999)).isEqualTo(906609);
     }
 }

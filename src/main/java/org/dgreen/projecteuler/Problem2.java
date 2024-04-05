@@ -4,7 +4,7 @@ import org.dgreen.projecteuler.utils.IntUtils;
 
 import java.util.stream.Stream;
 
-public class ProblemTwo {
+public class Problem2 {
     public static int calculateEvenFibonacciSumUpTo(int limit) {
         return Stream
                 .iterate(

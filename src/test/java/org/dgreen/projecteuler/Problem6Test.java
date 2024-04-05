@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ProblemSixTest {
+class Problem6Test {
     @Test
     void canCalculateTheSumSquareDifferenceUpToTen() {
-        assertThat(ProblemSix.sumSquareDifferenceUpTo(10))
+        assertThat(Problem6.sumSquareDifferenceUpTo(10))
                 .isEqualTo(2640);
     }
 
     @Test
     void canCalculateTheSumSquareDifferenceUpToOneHundred() {
-        assertThat(ProblemSix.sumSquareDifferenceUpTo(100))
+        assertThat(Problem6.sumSquareDifferenceUpTo(100))
                 .isEqualTo(25164150);
     }
 }

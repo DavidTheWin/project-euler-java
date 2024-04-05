@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ProblemTwoTest {
+class Problem2Test {
     @Test
     void canCalculateEvenFibonacciSumUpToFourMillion() {
-        var result = ProblemTwo.calculateEvenFibonacciSumUpTo(4000000);
+        var result = Problem2.calculateEvenFibonacciSumUpTo(4000000);
 
         assertThat(result).isEqualTo(4613732);
     }

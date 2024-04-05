@@ -2,7 +2,7 @@ package org.dgreen.projecteuler;
 
 import org.dgreen.projecteuler.utils.IntUtils;
 
-public class ProblemSeven {
+public class Problem7 {
     public static int nthPrimeNumber(int n) {
         var primeCount = 0;
 

@@ -1,6 +1,6 @@
 package org.dgreen.projecteuler;
 
-public class ProblemNine {
+public class Problem9 {
     public static int productOfTriplet() {
         for (int i = 0; i < 1000; i++) {
             for (int j = 0; j < 1000; j++) {
