@@ -6,6 +6,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ProblemThreeTest {
     @Test
+    void canFindLargestPrimeOfTwentyFive() {
+        var result = ProblemThree.largestPrimeFactorOf(25);
+
+        assertThat(result).isEqualTo(5);
+    }
+
+    @Test
     void canFindLargestPrimeOfGivenNumber() {
         var result = ProblemThree.largestPrimeFactorOf(13195);
 
