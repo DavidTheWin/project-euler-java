@@ -21,4 +21,22 @@ public class IntUtils {
         var asString = String.valueOf(x);
         return asString.equals(StringUtils.reverse(asString));
     }
+
+    public static int upperPrimeFactorLimitOf(int number) {
+        return (int) Math.ceil(Math.sqrt(number));
+    }
+
+    public static boolean isPrime(int number) {
+        if (number == 1 || number != 2 && isEven(number)) {
+            return false;
+        }
+
+        for (int i = 3; i <= upperPrimeFactorLimitOf(number); i += 2) {
+            if (isDivisibleBy(number, i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
