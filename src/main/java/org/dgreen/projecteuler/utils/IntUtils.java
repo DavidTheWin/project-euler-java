@@ -1,7 +1,5 @@
 package org.dgreen.projecteuler.utils;
 
-import java.util.Arrays;
-
 public class IntUtils {
     public static boolean isEven(int x) {
         return isDivisibleBy(x, 2);
@@ -12,9 +10,13 @@ public class IntUtils {
     }
 
     public static boolean isDivisibleByNumbers(int number, int[] divisors) {
-        return Arrays.stream(divisors)
-                .mapToObj(divisor -> isDivisibleBy(number, divisor))
-                .reduce(true, (a, b) -> a && b);
+        for (int divisor : divisors) {
+            if (!isDivisibleBy(number, divisor)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static boolean isPalindrome(int x) {

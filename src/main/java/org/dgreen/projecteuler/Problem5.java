@@ -9,10 +9,12 @@ public class Problem5 {
         if (limit < 1) {
             throw new IllegalArgumentException(String.format("The limit must be at least 1, was %d", limit));
         }
+        if (limit == 1) return 1;
 
         var divisors = IntStream.rangeClosed(1, limit).toArray();
 
-        for (int n = 1; n < Integer.MAX_VALUE; n++) {
+        //noinspection ConstantValue
+        for (int n = 2; n < Integer.MAX_VALUE; n += 2) {
             if (IntUtils.isDivisibleByNumbers(n, divisors)) {
                 return n;
             }
