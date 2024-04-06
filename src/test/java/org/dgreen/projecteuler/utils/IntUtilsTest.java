@@ -80,10 +80,16 @@ class IntUtilsTest {
         assertThat(IntUtils.isPrime(notPrime)).isFalse();
     }
 
-    @ParameterizedTest
-    @MethodSource("numbersWithNumberOfDivisors")
-    void canFindNumberOfDivisorsOfANumber(int number, int numberOfDivisors) {
-        assertThat(IntUtils.numberOfDivisorsOf(number)).isEqualTo(numberOfDivisors);
+    @Test
+    void canFindNumberOfDivisorsOfANumber2() {
+        for (int i = 1; i <= 100; i++) {
+            int finalI = i;
+            var naiveCount = IntStream.rangeClosed(1, i)
+                    .filter(it -> IntUtils.isDivisibleBy(finalI, it))
+                    .count();
+
+            assertThat(IntUtils.numberOfDivisorsOf(i)).isEqualTo(naiveCount);
+        }
     }
 
     @ParameterizedTest
@@ -130,18 +136,6 @@ class IntUtilsTest {
                 Arguments.of(1, 1),
                 Arguments.of(11, 4),
                 Arguments.of(20, 5)
-        );
-    }
-
-    private static Stream<Arguments> numbersWithNumberOfDivisors() {
-        return Stream.of(
-                Arguments.of(1, 1),
-                Arguments.of(4, 3),
-                Arguments.of(6, 4),
-                Arguments.of(10, 4),
-                Arguments.of(16, 5),
-                Arguments.of(25, 3),
-                Arguments.of(28, 6)
         );
     }
 
