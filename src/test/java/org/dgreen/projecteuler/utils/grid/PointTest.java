@@ -10,8 +10,48 @@ class PointTest {
     private static final Point middle = new Point(5, 5);
     private static final Point upperLeft = new Point(2, 2);
 
+    @Test
+    void canPrettyPrint() {
+        assertThat(middle.toString()).isEqualTo("(5, 5)");
+    }
+
     @Nested
-    class generateQuads {
+    class Surface {
+        @Test
+        void theSamePointHasZeroSurface() {
+            assertThat(middle.surfaceOfBlockTo(middle)).isEqualTo(0);
+        }
+
+        @Test
+        void pointsOnALineHaveZeroSurface() {
+            var zeroZero = new Point(0, 0);
+            var zeroOne = new Point(0, 1);
+            var oneZero = new Point(1, 0);
+
+            assertThat(zeroZero.surfaceOfBlockTo(zeroOne)).isEqualTo(0);
+            assertThat(zeroZero.surfaceOfBlockTo(oneZero)).isEqualTo(0);
+        }
+
+        @Test
+        void surfaceOnePointAwayIsOne() {
+            var zeroZero = new Point(0, 0);
+            var oneOne = new Point(1, 1);
+
+            assertThat(zeroZero.surfaceOfBlockTo(oneOne)).isEqualTo(1);
+        }
+
+        @Test
+        void surfaceTwoPointsAwayIsFour() {
+            var zeroZero = new Point(0, 0);
+            var oneOne = new Point(2,2);
+
+            assertThat(zeroZero.surfaceOfBlockTo(oneOne)).isEqualTo(4);
+            assertThat(zeroZero.surfaceKey(oneOne)).isEqualTo("2x2");
+        }
+    }
+
+    @Nested
+    class GenerateQuads {
         @Test
         void canGenerateAllQuadPathsInTheMiddle() {
             var quads = middle.generateQuads(10, 10);
@@ -58,8 +98,17 @@ class PointTest {
         @Test
         void doesNotGoDownIfItWouldGoOutOfBounds() {
             var downGroup = upperLeft.downGroup(4);
-
             assertThat(downGroup.isEmpty()).isTrue();
+
+            var downOne = middle.down(5);
+            assertThat(downOne).isEmpty();
+        }
+
+        @Test
+        void canReturnTheNextPointDown() {
+            var downOne = middle.down(10);
+            assertThat(downOne.isPresent()).isTrue();
+            assertThat(downOne.get()).isEqualTo(new Point(5, 6));
         }
     }
 
@@ -94,8 +143,17 @@ class PointTest {
         @Test
         void doesNotGoRightIfItWouldGoOutOfBounds() {
             var rightGroup = upperLeft.rightGroup(4);
-
             assertThat(rightGroup.isEmpty()).isTrue();
+
+            var rightOne = middle.right(5);
+            assertThat(rightOne).isEmpty();
+        }
+
+        @Test
+        void canReturnTheNextPointRight() {
+            var rightOne = middle.right(10);
+            assertThat(rightOne.isPresent()).isTrue();
+            assertThat(rightOne.get()).isEqualTo(new Point(6, 5));
         }
     }
 

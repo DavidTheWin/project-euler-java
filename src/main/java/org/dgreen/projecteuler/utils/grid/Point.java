@@ -5,6 +5,35 @@ import java.util.List;
 import java.util.Optional;
 
 public record Point(int x, int y) {
+    @Override
+    public String toString() {
+        return String.format("(%d, %d)", x, y);
+    }
+
+    public int surfaceOfBlockTo(Point other) {
+        return (other.x - x) * (other.y - y);
+    }
+
+    public String surfaceKey(Point other) {
+        return ( other.x - x) + "x" + (other.y - y);
+    }
+
+    public Optional<Point> down(int yMax) {
+        if (y + 1 > yMax) {
+            return Optional.empty();
+        } else {
+            return Optional.of(new Point(x, y + 1));
+        }
+    }
+
+    public Optional<Point> right(int xMax) {
+        if (x + 1 > xMax) {
+            return Optional.empty();
+        } else {
+            return Optional.of(new Point(x + 1, y ));
+        }
+    }
+
     public List<PointQuad> generateQuads(int xMax, int yMax) {
         var groups = new ArrayList<PointQuad>();
 
