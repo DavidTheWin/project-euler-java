@@ -24,9 +24,11 @@ public class Problem13 {
             digitsOfSum.push((char)(sum + 48));
         }
 
-        var charsInCarryOver = String.valueOf(carryOver).toCharArray();
-        for (char c : charsInCarryOver) {
-            digitsOfSum.push(c);
+        if (carryOver > 0) {
+            var charsInCarryOver = String.valueOf(carryOver).toCharArray();
+            for (char c : charsInCarryOver) {
+                digitsOfSum.push(c);
+            }
         }
 
         return firstNDigitsFromStack(digitsOfSum, numberOfDigits);
