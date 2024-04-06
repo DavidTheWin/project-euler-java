@@ -1,12 +1,11 @@
 package org.dgreen.projecteuler;
 
-import java.util.ArrayList;
+import org.dgreen.projecteuler.utils.grid.Point;
+import org.dgreen.projecteuler.utils.grid.PointQuad;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public class Problem11 {
     private static final int X_MAX = 19;
@@ -14,18 +13,18 @@ public class Problem11 {
 
     public static int largestProductInGrid() {
         var grid = parseGrid();
-        var checkedCoordGroups = new HashSet<CoordGroup>();
+        var checkedPointQuads = new HashSet<PointQuad>();
         var largestProduct = 0;
 
         for (int x = 0; x < X_MAX; x++) {
             for (int y = 0; y < Y_MAX; y++) {
-                var coord = new Coord(x, y);
-                var coordGroups = coord.generateGroups();
+                var point = new Point(x, y);
+                var pointQuads = point.generateQuads(X_MAX, Y_MAX);
 
-                for (CoordGroup group : coordGroups) {
-                    if (!checkedCoordGroups.contains(group)) {
-                        checkedCoordGroups.add(group);
-                        var product = group.calculateProduct(grid);
+                for (PointQuad quad : pointQuads) {
+                    if (!checkedPointQuads.contains(quad)) {
+                        checkedPointQuads.add(quad);
+                        var product = quad.calculateProduct(grid);
                         if (product > largestProduct) {
                             largestProduct = product;
                         }
@@ -37,137 +36,8 @@ public class Problem11 {
         return largestProduct;
     }
 
-    private record CoordGroup(Coord a, Coord b, Coord c, Coord d) {
-        public int calculateProduct(Map<Coord, Integer> grid) {
-            return grid.get(a) * grid.get(b) * grid.get(c) * grid.get(d);
-        }
-    }
-
-    private record Coord(int x, int y) {
-        private static final int INDEX_MAX_CHANGE = 3;
-
-        public List<CoordGroup> generateGroups() {
-            var groups = new ArrayList<CoordGroup>();
-
-            upGroup().ifPresent(groups::add);
-            downGroup().ifPresent(groups::add);
-            leftGroup().ifPresent(groups::add);
-            rightGroup().ifPresent(groups::add);
-            neGroup().ifPresent(groups::add);
-            seGroup().ifPresent(groups::add);
-            swGroup().ifPresent(groups::add);
-            nwGroup().ifPresent(groups::add);
-
-            return groups;
-        }
-
-        private Optional<CoordGroup> upGroup() {
-            if (y - INDEX_MAX_CHANGE < 0) {
-                return Optional.empty();
-            } else {
-                return Optional.of(new CoordGroup(
-                        new Coord(x, y),
-                        new Coord(x, y - 1),
-                        new Coord(x, y - 2),
-                        new Coord(x, y - 3)
-                ));
-            }
-        }
-
-        private Optional<CoordGroup> downGroup() {
-            if (y + INDEX_MAX_CHANGE > Y_MAX) {
-                return Optional.empty();
-            } else {
-                return Optional.of(new CoordGroup(
-                        new Coord(x, y),
-                        new Coord(x, y + 1),
-                        new Coord(x, y + 2),
-                        new Coord(x, y + 3)
-                ));
-            }
-        }
-
-        private Optional<CoordGroup> leftGroup() {
-            if (x  - INDEX_MAX_CHANGE < 0) {
-                return Optional.empty();
-            } else {
-                return Optional.of(new CoordGroup(
-                        new Coord(x, y),
-                        new Coord(x - 1, y),
-                        new Coord(x - 2, y),
-                        new Coord(x - 3, y)
-                ));
-            }
-        }
-
-        private Optional<CoordGroup> rightGroup() {
-            if (x + INDEX_MAX_CHANGE > X_MAX) {
-                return Optional.empty();
-            } else {
-                return Optional.of(new CoordGroup(
-                        new Coord(x, y),
-                        new Coord(x + 1, y),
-                        new Coord(x + 2, y),
-                        new Coord(x + 3, y)
-                ));
-            }
-        }
-
-        private Optional<CoordGroup> neGroup() {
-            if (x + INDEX_MAX_CHANGE > X_MAX || y - INDEX_MAX_CHANGE < 0) {
-                return Optional.empty();
-            } else {
-                return Optional.of(new CoordGroup(
-                        new Coord(x, y),
-                        new Coord(x + 1, y - 1),
-                        new Coord(x + 2, y - 2),
-                        new Coord(x + 3, y - 3)
-                ));
-            }
-        }
-
-        private Optional<CoordGroup> seGroup() {
-            if (x + INDEX_MAX_CHANGE > X_MAX || y + INDEX_MAX_CHANGE > Y_MAX) {
-                return Optional.empty();
-            } else {
-                return Optional.of(new CoordGroup(
-                        new Coord(x, y),
-                        new Coord(x + 1, y + 1),
-                        new Coord(x + 2, y + 2),
-                        new Coord(x + 3, y + 3)
-                ));
-            }
-        }
-
-        private Optional<CoordGroup> swGroup() {
-            if (x - INDEX_MAX_CHANGE < 0 || y + INDEX_MAX_CHANGE > Y_MAX) {
-                return Optional.empty();
-            } else {
-                return Optional.of(new CoordGroup(
-                        new Coord(x, y),
-                        new Coord(x - 1, y + 1),
-                        new Coord(x - 2, y + 2),
-                        new Coord(x - 3, y + 3)
-                ));
-            }
-        }
-
-        private Optional<CoordGroup> nwGroup() {
-            if (x - INDEX_MAX_CHANGE < 0 || y - INDEX_MAX_CHANGE < 0) {
-                return Optional.empty();
-            } else {
-                return Optional.of(new CoordGroup(
-                        new Coord(x, y),
-                        new Coord(x - 1, y - 1),
-                        new Coord(x - 2, y - 2),
-                        new Coord(x - 3, y - 3)
-                ));
-            }
-        }
-    }
-
-    private static HashMap<Coord, Integer> parseGrid() {
-        var grid = new LinkedHashMap<Coord, Integer>();
+    private static HashMap<Point, Integer> parseGrid() {
+        var grid = new LinkedHashMap<Point, Integer>();
 
         var rows = gridString.split("\n");
         for (int y = 0; y < rows.length; y++) {
@@ -175,7 +45,7 @@ public class Problem11 {
             var columns = row.split(" ");
 
             for (int x = 0; x < columns.length; x++) {
-                grid.put(new Coord(x, y), Integer.parseInt(columns[x]));
+                grid.put(new Point(x, y), Integer.parseInt(columns[x]));
             }
         }
 
