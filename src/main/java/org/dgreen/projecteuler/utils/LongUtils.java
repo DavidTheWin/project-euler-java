@@ -18,12 +18,30 @@ public class LongUtils {
             return false;
         }
 
-        for (int i = 3; i <= upperPrimeFactorLimitOf(number); i += 2) {
+        for (long i = 3; i <= upperPrimeFactorLimitOf(number); i += 2) {
             if (isDivisibleBy(number, i)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    public static long collatzLength(long number) {
+        return collatzLength(number, 0);
+    }
+
+    private static long collatzLength(long number, long count) {
+        count++;
+
+        if (number == 1) {
+            return count;
+        }
+
+        if (isEven(number)) {
+            return collatzLength(number / 2, count);
+        } else {
+            return collatzLength(number * 3 + 1, count);
+        }
     }
 }

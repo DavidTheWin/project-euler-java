@@ -61,6 +61,12 @@ class LongUtilsTest {
         assertThat(LongUtils.isPrime(notPrime)).isFalse();
     }
 
+    @ParameterizedTest
+    @MethodSource("collatzLengths")
+    void canCalculateTheLengthsOfCollatzSequences(int number, int length) {
+        assertThat(LongUtils.collatzLength(number)).isEqualTo(length);
+    }
+
     private static Stream<Arguments> numbersDivisibleByTheOther() {
         return Stream.of(
                 Arguments.of(2, 2),
@@ -85,6 +91,15 @@ class LongUtilsTest {
                 Arguments.of(1, 1),
                 Arguments.of(11, 4),
                 Arguments.of(20, 5)
+        );
+    }
+
+    private static Stream<Arguments> collatzLengths() {
+        return Stream.of(
+                Arguments.of(9, 20),
+                Arguments.of(13, 10),
+                Arguments.of(97, 119),
+                Arguments.of(871, 179)
         );
     }
 }
