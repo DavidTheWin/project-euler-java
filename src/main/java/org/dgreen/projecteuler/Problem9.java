@@ -16,7 +16,7 @@ public class Problem9 {
         throw new IllegalStateException("Did not find a pythagorean triple that sums to one thousand");
     }
 
-    record Triple(int a, int b, int c) {
+    private record Triple(int a, int b, int c) {
         int product() {
             return a * b * c;
         }

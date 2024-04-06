@@ -17,6 +17,6 @@ public class Problem2 {
                 .sum();
     }
 
-    record FibbPair(int prev, int sum) {
+    private record FibbPair(int prev, int sum) {
     }
 }
