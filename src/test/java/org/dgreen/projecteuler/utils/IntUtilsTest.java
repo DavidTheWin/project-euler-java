@@ -64,20 +64,38 @@ class IntUtilsTest {
 
     @ParameterizedTest
     @MethodSource("numbersWithUpperPrimeFactorLimit")
-    void canFindTheUpperPrimeFactorLimitOfANumber(long number, long upperLimit) {
-        assertThat(LongUtils.upperPrimeFactorLimitOf(number)).isEqualTo(upperLimit);
+    void canFindTheUpperPrimeFactorLimitOfANumber(int number, int upperLimit) {
+        assertThat(IntUtils.upperPrimeFactorLimitOf(number)).isEqualTo(upperLimit);
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {2, 3, 5, 7, 11, 29, 6857})
-    void isPrimeReturnsTrueWhenGivenAPrimeNumber(long prime) {
-        assertThat(LongUtils.isPrime(prime)).isTrue();
+    @ValueSource(ints = {2, 3, 5, 7, 11, 29, 6857})
+    void isPrimeReturnsTrueWhenGivenAPrimeNumber(int prime) {
+        assertThat(IntUtils.isPrime(prime)).isTrue();
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {1, 4, 6, 9, 14})
-    void isPrimeReturnsFalseWhenGivenANonPrimeNumber(long notPrime) {
-        assertThat(LongUtils.isPrime(notPrime)).isFalse();
+    @ValueSource(ints = {1, 4, 6, 9, 14})
+    void isPrimeReturnsFalseWhenGivenANonPrimeNumber(int notPrime) {
+        assertThat(IntUtils.isPrime(notPrime)).isFalse();
+    }
+
+    @ParameterizedTest
+    @MethodSource("numbersWithNumberOfDivisors")
+    void canFindNumberOfDivisorsOfANumber(int number, int numberOfDivisors) {
+        assertThat(IntUtils.numberOfDivisorsOf(number)).isEqualTo(numberOfDivisors);
+    }
+
+    @ParameterizedTest
+    @MethodSource("nthTriangleNumber")
+    void canCalculateTriangleNumbers(int n, int triangleNumber) {
+        assertThat(IntUtils.nthTriangleNumber(n)).isEqualTo(triangleNumber);
+    }
+
+    @ParameterizedTest
+    @MethodSource("squaresOrNot")
+    void canDetermineWhetherANumberIsSquare(int number, boolean isSquare) {
+        assertThat(IntUtils.isSquare(number)).isEqualTo(isSquare);
     }
 
     private static Stream<Arguments> numbersDivisibleByTheOther() {
@@ -112,6 +130,39 @@ class IntUtilsTest {
                 Arguments.of(1, 1),
                 Arguments.of(11, 4),
                 Arguments.of(20, 5)
+        );
+    }
+
+    private static Stream<Arguments> numbersWithNumberOfDivisors() {
+        return Stream.of(
+                Arguments.of(1, 1),
+                Arguments.of(4, 3),
+                Arguments.of(6, 4),
+                Arguments.of(10, 4),
+                Arguments.of(16, 5),
+                Arguments.of(25, 3),
+                Arguments.of(28, 6)
+        );
+    }
+
+    private static Stream<Arguments> nthTriangleNumber() {
+        return Stream.of(
+                Arguments.of(1, 1),
+                Arguments.of(2, 3),
+                Arguments.of(2, 3),
+                Arguments.of(7, 28)
+        );
+    }
+
+    private static Stream<Arguments> squaresOrNot() {
+        return Stream.of(
+                Arguments.of(1, true),
+                Arguments.of(2, false),
+                Arguments.of(4, true),
+                Arguments.of(5, false),
+                Arguments.of(16, true),
+                Arguments.of(25, true),
+                Arguments.of(50, false)
         );
     }
 }

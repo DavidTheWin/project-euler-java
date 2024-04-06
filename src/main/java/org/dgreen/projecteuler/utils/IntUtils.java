@@ -41,4 +41,30 @@ public class IntUtils {
 
         return true;
     }
+
+    public static int numberOfDivisorsOf(int n) {
+        if (n == 1) return 1;
+
+        var numberOfDivisors = 0;
+        var upperLimit = upperPrimeFactorLimitOf(n);
+
+        for (int i = 1; i < upperLimit; i++) {
+            if (isDivisibleBy(n, i)) {
+                numberOfDivisors += 2;
+            }
+        }
+
+        if (isSquare(n)) numberOfDivisors++;
+
+        return numberOfDivisors;
+    }
+
+    public static int nthTriangleNumber(int n) {
+        return (n * (n + 1)) / 2;
+    }
+
+    public static boolean isSquare(int n) {
+        var sqrt = Math.sqrt(n);
+        return sqrt == Math.floor(sqrt);
+    }
 }
