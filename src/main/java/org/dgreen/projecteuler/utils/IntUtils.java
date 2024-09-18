@@ -1,5 +1,7 @@
 package org.dgreen.projecteuler.utils;
 
+import java.util.stream.IntStream;
+
 public class IntUtils {
     public static boolean isEven(int x) {
         return isDivisibleBy(x, 2);
@@ -40,6 +42,12 @@ public class IntUtils {
         }
 
         return true;
+    }
+
+    public static int[] properDivisorsOf(int n) {
+        return IntStream.range(1, n)
+                .filter(y -> isDivisibleBy(n, y))
+                .toArray();
     }
 
     public static int numberOfDivisorsOf(int n) {
